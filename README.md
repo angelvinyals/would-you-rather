@@ -3,6 +3,39 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+### What is "Would you rather?"
+
+"Would You Rather?" Project it's a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
+
+In Would You Rather?, users are be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
+
+
+### Rubricks
+
+Application Setup
+
+Is the application easy to install and start?  
+
+The application requires only npm install and npm start to install and launch.  |
+
+Does the application include README with clear installation and launch instructions?  
+A README is included with the project. The README includes a description and clear instructions for installing and launching the project.
+
+Login Flow
+
+Does the application have a way to log in and log out?  
+The application requires only npm install and npm start to install and launch.
+
+1-There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
+
+2-The application works correctly regardless of which user is selected.
+
+3-The application allows the user to log out and log back in. The user should be logged in to submit new polling questions, vote, and view the leaderboard.
+
+4-Once the user logs in, the home page is shown.
+
+
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
@@ -135,14 +168,13 @@ my-app/
   package.json
   public/
     index.html
-    favicon.ico
   src/
     App.css
     App.js
     App.test.js
     index.css
     index.js
-    logo.svg
+
 ```
 
 For the project to build, **these files must exist with exact filenames**:
@@ -150,16 +182,7 @@ For the project to build, **these files must exist with exact filenames**:
 * `public/index.html` is the page template;
 * `src/index.js` is the JavaScript entry point.
 
-You can delete or rename the other files.
 
-You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by Webpack.<br>
-You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t see them.
-
-Only files inside `public` can be used from `public/index.html`.<br>
-Read instructions below for using assets from JavaScript and HTML.
-
-You can, however, create more top-level directories.<br>
-They will not be included in the production build so you can use them for things like documentation.
 
 ## Available Scripts
 
@@ -172,31 +195,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](#deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Supported Browsers
 
@@ -300,7 +298,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1989,7 +1987,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
@@ -2429,7 +2427,7 @@ To resolve this:
 1. Open an issue on the dependency's issue tracker and ask that the package be published pre-compiled.
   * Note: Create React App can consume both CommonJS and ES modules. For Node.js compatibility, it is recommended that the main entry point is CommonJS. However, they can optionally provide an ES module entry point with the `module` field in `package.json`. Note that **even if a library provides an ES Modules version, it should still precompile other ES6 features to ES5 if it intends to support older browsers**.
 
-2. Fork the package and publish a corrected version yourself. 
+2. Fork the package and publish a corrected version yourself.
 
 3. If the dependency is small enough, copy it to your `src/` folder and treat it as application code.
 
