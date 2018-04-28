@@ -12,7 +12,7 @@ In Would You Rather?, users are be able to answer questions, see which questions
 
 ### Rubricks
 
-Application Setup
+`Application Setup`
 
 Is the application easy to install and start?  
 
@@ -21,12 +21,11 @@ The application requires only npm install and npm start to install and launch.  
 Does the application include README with clear installation and launch instructions?  
 A README is included with the project. The README includes a description and clear instructions for installing and launching the project.
 
-Login Flow
-
-Does the application have a way to log in and log out?  
-The application requires only npm install and npm start to install and launch.
+`Login Flow`
 
 1-There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
+
+WyR? log in process is based in the login [tutorial demo application by jasonwatmore](http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example)  The tutorial demo is a React + Redux Boilerplate application that uses JWT authentication, it's based on the code from a real world secure web application he developed for a law firm
 
 2-The application works correctly regardless of which user is selected.
 
