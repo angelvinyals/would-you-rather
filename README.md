@@ -4,7 +4,7 @@ This project is  the final assessment project for Udacity's React & Redux course
 
 
 
-### But what is "Would you rather?"
+## But, what is "Would you rather?"
 
 "Would You Rather?" Project is a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
 
@@ -100,25 +100,25 @@ Your code will talk to the database via 4 methods:
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
 
 
-### Rubricks
+## Rubricks
 
-`Application Setup`
+### Application Setup
 
-Is the application easy to install and start?  
+`Is the application easy to install and start?`  
 
 The application requires only npm install and npm start to install and launch.  |
 
-Does the application include README with clear installation and launch instructions?  
+`Does the application include README with clear installation and launch instructions? `
 
 A README is included with the project. The README includes a description and clear instructions for installing and launching the project.
 
-`Login Flow`
+###Login Flow`
 
-Does the application have a way to log in and log out?  
+`Does the application have a way to log in and log out?`
 
-1-There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
+1 - There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
 
-Before to go about creating our protected routes, it needs a way to figure out if the user is authenticated. Because rubricks let's use, it'll use a dummy object to mock our auth service.
+The way to figure out if the user is authenticated or not will use a dummy object to mock our auth service.
 
 Then it builds out the components that’ll be rendered by React Router when certain paths match. There are  three: a Public component, a Protected component, and a Login component.
 
