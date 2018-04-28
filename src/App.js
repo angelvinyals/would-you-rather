@@ -6,39 +6,88 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+import Public from './components/public'
+import Questions from './components/questions'
 import './App.css';
 
 class App extends Component {
+
   render() {
+    let passingProps= {userName: 'oneName'}
     return (
-      <div className="App">
-        <header className="App-header">
-          <Router>
-            <div>
-              <AuthButton history={this.props.history}/>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <AuthButton history={this.props.history}/>
               <ul>
-                <li><Link to="/public">Public Page</Link></li>
-                <li><Link to="/protected">Protected Page</Link></li>
+                <li><Link to="/">Would you rather?</Link></li>
+                <li><Link to="/questions">Questions Page</Link></li>
               </ul>
-              <Route path="/public" component={Public}/>
+          </header>
+              <Route path="/home" component={Public}/>
               <Route path="/login" component={Login}/>
-              <PrivateRoute path='/protected' component={Protected} />
-            </div>
-          </Router>
-        </header>
-      </div>
+              <PrivateRoute path='/questions' component={Questions}/>
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
 
-
-const fakeAuth = {
+export const fakeAuth = {
+  users : {
+    sarahedo: {
+      id: 'sarahedo',
+      name: 'Sarah Edo',
+      avatarURL: 'sarahedo.png',
+      answers: {
+        "8xf0y6ziyjabvozdd253nd": 'optionOne',
+        "6ni6ok3ym7mf1p33lnez": 'optionOne',
+        "am8ehyc8byjqgar0jgpub9": 'optionTwo',
+        "loxhs1bqm25b708cmbf3g": 'optionTwo'
+      },
+      questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
+    },
+    tylermcginnis: {
+      id: 'tylermcginnis',
+      name: 'Tyler McGinnis',
+      avatarURL: 'tylemcginnis.png' ,
+      answers: {
+        "vthrdm985a262al8qx3do": 'optionOne',
+        "xj352vofupe1dqz9emx13r": 'optionTwo',
+      },
+      questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do'],
+    },
+    johndoe: {
+      id: 'johndoe',
+      name: 'John Doe',
+      avatarURL: 'jonhdoe.png' ,
+      answers: {
+        "xj352vofupe1dqz9emx13r": 'optionOne',
+        "vthrdm985a262al8qx3do": 'optionTwo',
+        "6ni6ok3ym7mf1p33lnez": 'optionOne'
+      },
+      questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
+    }
+  },
   isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
+  usernameLogged : '',
+  authenticate(cb, username) {
+    console.log(username)
+    console.log(this.users.sarahedo.id)
+    Object.entries(this.users).map(([key, value]) =>{
+      console.log(key)
+      if(username===key){
+        this.isAuthenticated = true
+        this.usernameLogged = key
+        return
+      } else {
+        return
+      }
+    }/* do what you want */)
+     // fake async
+    setTimeout(cb, 100)
   },
   signout(cb) {
     this.isAuthenticated = false
@@ -46,7 +95,9 @@ const fakeAuth = {
   }
 }
 
-const Public = () => <h3>Public</h3>
+
+
+//const Public = () => <h3>Public</h3>
 const Protected = () => <h3>Protected</h3>
 
 class Login extends React.Component {
@@ -54,12 +105,15 @@ class Login extends React.Component {
     redirectToReferrer: false
   }
 
-  login = () => {
+  handleSignIn =(e) =>{
+    e.preventDefault()
+    let username = this.refs.username.value
     fakeAuth.authenticate(() => {
       this.setState({
         redirectToReferrer: true
       })
-    })
+    }, username)
+
   }
 
   render() {
@@ -73,7 +127,12 @@ class Login extends React.Component {
     return (
       <div>
         <p>You must log in to view the page</p>
-        <button onClick={this.login}>Log in</button>
+        <form onSubmit={this.handleSignIn}>
+          <h3>Log in</h3>
+          <input type="text" ref="username" placeholder="enter you username" />
+          <input type="submit" value="Login" />
+        </form>
+
       </div>
     )
   }
@@ -108,7 +167,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const AuthButton = withRouter(({ history }) => (
   fakeAuth.isAuthenticated ? (
     <p>
-      Welcome! <button onClick={() => {
+      Welcome, {fakeAuth.usernameLogged}! <button onClick={() => {
         fakeAuth.signout(() => history.push('/'))
       }}>Sign out</button>
     </p>
