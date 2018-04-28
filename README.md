@@ -1,8 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
 ### What is "Would you rather?"
 
 "Would You Rather?" Project it's a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
@@ -12,21 +9,47 @@ In Would You Rather?, users are be able to answer questions, see which questions
 
 ### Rubricks
 
-Application Setup
+`Application Setup`
 
 Is the application easy to install and start?  
 
 The application requires only npm install and npm start to install and launch.  |
 
 Does the application include README with clear installation and launch instructions?  
+
 A README is included with the project. The README includes a description and clear instructions for installing and launching the project.
 
-Login Flow
+`Login Flow`
 
 Does the application have a way to log in and log out?  
-The application requires only npm install and npm start to install and launch.
 
 1-There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
+
+Before to go about creating our protected routes, it needs a way to figure out if the user is authenticated. Because rubricks let's use, it'll use a dummy object to mock our auth service.
+
+Then it builds out the components that’ll be rendered by React Router when certain paths match. There are  three: a Public component, a Protected component, and a Login component.
+
+Next step is render the Routes for /public and /login and the Links for /public and /protected. Anyone will be able to access /public (and therefore see the Public component), but eventually, anyone who tries to access /protected, who isn’t authenticated, will get redirected to /login.
+
+So naturally, the next step is to render a Route with a path of /protected. The problem is that by rendering a normal Route, anyone will be able to access it, which obviously isn’t what we want. It would be nice if, just like React Router gives us a Route component, they also gave us a PrivateRoute component which would render the component only if the user was authenticated.Unfortunately, they don’t. But, that’s probably for the best since we can just create our own which handles our own use cases.
+
+The requirements for our PrivateRoute component are:
+
+1-It has the same API as <Route />.
+2-It renders a <Route /> and passes all the props through to it.
+3-It checks if the user is authenticated, if they are, it renders the “component” prop. If not, it redirects the user to /login.
+
+A few notes on the above code. With Route, if a path isn’t supplied, then that Route will always match. So in the case above, because we didn’t supply a path prop, the Route will always match which means the render prop will always be called. Then, depending on the auth status of the user, we’ll either render a Redirect or render the component (which is why we needed to destructure and rename the component prop in the function’s arguments).
+
+You should be redirect to /login instead of being taken to the /protected page if isAuthenticated is false, so renders Login component so that we can actually authenticate calling fakeAuth.authenticate.
+
+ When the user authenticates (through the login method), they should be redirected to the home (/) page. There’s a few different approaches to redirecting with React Router. it cans use the imperative history.push method or it cans use the declarative <Redirect /> component. In this case, let’s go with <Redirect />. It’ll need to add a property to the component’s state that will clue us in to when we should render a <Redirect />. When the user authenticates, it changes redirectToReferrer to true which causes a re-render and then renders the <Redirect /> component taking the user back to the initial page the user was trying to access before he was redirected
+
+ For making that, it needs to pass along the current route that user is trying to visit so it cans come back to it after it authenticate. It does that by changing the Redirect's top prop from a string to an object and pass alogns a state key whose value is the current location of the route the is trying to access.
+
+ The only other feature it needs to add is if user is logged in, it could  log out. For that it creates an AuthButton component that if the user is logged in, will render a logout button and if they’re not logged in, will render text that says “You are not logged in”
+
+
 
 2-The application works correctly regardless of which user is selected.
 
