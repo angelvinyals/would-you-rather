@@ -18,7 +18,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <AuthButton history={this.props.history}/>
+            <AuthButton/>
               <ul>
                 <li><Link to="/">Would you rather?</Link></li>
                 <li><Link to="/questions">Questions Page</Link></li>
