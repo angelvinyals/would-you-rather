@@ -10,6 +10,19 @@ import Public from './components/public'
 import Questions from './components/questions'
 import './App.css';
 
+export const AppContext = React.createContext()
+export class AppProvider extends Component {
+  state = {
+    number : 11,
+    userName: 'oneName'
+  }
+render() {
+    return <AppContext.Provider value={this.state}>
+      {this.props.children}
+    </AppContext.Provider>
+  }
+}
+
 class App extends Component {
 
   render() {
@@ -17,17 +30,21 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <AuthButton/>
-              <ul>
-                <li><Link to="/">Would you rather?</Link></li>
-                <li><Link to="/questions">Questions Page</Link></li>
-              </ul>
-          </header>
-              <Route path="/home" component={Public}/>
-              <Route path="/login" component={Login}/>
-              <PrivateRoute path='/questions' component={Questions}/>
-        </div>
+
+            <header className="App-header">
+
+              <AuthButton/>
+
+                <ul>
+                  <li><Link to="/">Would you rather?</Link></li>
+                  <li><Link to="/questions">Questions Page</Link></li>
+                </ul>
+            </header>
+                <Route path="/home" component={Public}/>
+                <Route path="/login" component={Login}/>
+                <PrivateRoute path='/questions' component={Questions}/>
+
+      </div>
       </Router>
     );
   }
@@ -167,6 +184,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const AuthButton = withRouter(({ history }) => (
   fakeAuth.isAuthenticated ? (
     <p>
+
       Welcome, {fakeAuth.usernameLogged}! <button onClick={() => {
         fakeAuth.signout(() => history.push('/'))
       }}>Sign out</button>
