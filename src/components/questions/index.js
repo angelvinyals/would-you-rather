@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import View from "./View";
+//import View from "./View";
+import Sorting from "./Sorting";
 import {_getQuestions} from '../../_DATA.js'
 
 
@@ -7,7 +8,8 @@ import {_getQuestions} from '../../_DATA.js'
 class Questions extends Component {
   state = {
     isLoading: true,
-    data:{}
+    data:{},
+    error:false
   }
 
 
@@ -17,7 +19,7 @@ class Questions extends Component {
       console.log(`inside try`)
       this.setState({
         isLoading:true,
-        error: false
+        hasErrored: false
       })
       const data = await _getQuestions()
       console.log(`after loadData`)
@@ -28,23 +30,28 @@ class Questions extends Component {
     } catch (ex) {
       this.setState({
         isLoading:false,
-        error:true
+        hasErrored:true
       })
     }
   }
 
   render() {
-    const {data,isLoading} = this.state
+    const {data,isLoading,hasErrored} = this.state
+
+    if (hasErrored) {
+      return <p>Sorry! There was an error loading questions</p>;
+    }
 
     if (isLoading) {
-     return <p>Loading ...</p>;
-   }
+      return <p>Loading ...</p>;
+    }
     return (
         <div>
           {Object.keys(data).length > 0 &&
             <div>
+
               <h5>Please, select one and only one answer to this question:</h5>
-              <View {...this.state} />;
+              <Sorting {...this.state} />
             </div>
           }
         </div>
