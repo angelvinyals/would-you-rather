@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
 
-        </header>      
-      </div>
-    );
-  }
+	componentDidMount (){
+		//console.log('...componetDidMount')
+		this.props.dispatch(handleInitialData())
+	}
+
+  	render() {
+  		//console.log('....app render')
+    	return (
+      		<div >
+        		starter code 
+
+      		</div>
+    	);
+  	}
 }
 
-export default App;
+export default connect()(App);
