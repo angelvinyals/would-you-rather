@@ -11,14 +11,28 @@ class App extends Component {
 	}
 
   	render() {
-  		//console.log('....app render')
+  		const {authedUser, usersArray, usersId} = this.props
     	return (
-      		<div >
-        		starter code 
-
-      		</div>
+    		<div>
+		      {authedUser ? (
+		        <p>is logged</p>
+		      ) : (
+		        <p>is NOT logged</p>
+		        
+		      )}
+		    </div>
     	);
   	}
 }
 
-export default connect()(App);
+function mapStateToProps ({authedUser, users}) {  
+
+  return {
+    authedUser,
+    usersArray:Object.values(users),
+    usersId:Object.keys(users),    
+  };
+}
+
+
+export default connect(mapStateToProps)(App);
