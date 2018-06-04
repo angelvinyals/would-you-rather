@@ -5,7 +5,7 @@ import { setAuthedUser } from './authedUser'
 
 const AUTHED_ID = 'sarahedo' //TODO: This has to be changet by clicking on a user in login page
 
-export funtion handleInitialData () {
+export function handleInitialData () {
 	return (dispatch)=>{
 		return getInitialData()
 			.then(({users, questions})=>{
