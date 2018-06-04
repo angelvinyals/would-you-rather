@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import { setAuthedUser } from '../actions/authedUser'
+import Login from  './Login'
+import Home from  './Home'
 import './App.css';
 
 class App extends Component {
@@ -10,15 +13,22 @@ class App extends Component {
 		this.props.dispatch(handleInitialData())
 	}
 
+	handleClickAvatar = (e, id) =>{
+		e.preventDefault()
+		this.props.dispatch(setAuthedUser(id))
+	}
+
   	render() {
-  		const {authedUser, usersArray, usersId} = this.props
+  		const {authedUser, usersArray, usersId, users} = this.props
     	return (
     		<div>
 		      {authedUser ? (
-		        <p>is logged</p>
+		        <Home user={users[authedUser]}/>
 		      ) : (
-		        <p>is NOT logged</p>
-		        
+		      	<Login 
+		      		usersArray={usersArray}
+		      		handleClickAvatar={this.handleClickAvatar}
+		      	/>
 		      )}
 		    </div>
     	);
@@ -29,6 +39,7 @@ function mapStateToProps ({authedUser, users}) {
 
   return {
     authedUser,
+    users,
     usersArray:Object.values(users),
     usersId:Object.keys(users),    
   };
