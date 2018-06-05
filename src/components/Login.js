@@ -20,7 +20,7 @@ class Login extends Component {
 								  	className='image'
 								  	/>
 								  <div className="overlay">
-								  	<div class="text"> {user.name}</div>						    
+								  	<div className="text"> {user.name}</div>						    
 								  </div>
 								</div>
 							</div>
