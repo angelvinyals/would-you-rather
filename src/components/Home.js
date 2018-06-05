@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import QuestionsList from './QuestionsList'
+import Logout from './Logout'
 import './Home.css';
 
 class Home extends Component {	
@@ -16,7 +17,7 @@ class Home extends Component {
 				  	className='image-home'
 				  	/>
 		      <h3>Welcome,  {user.name}</h3>
-		      <button>log  out</button>
+		      <Logout />
 		      <QuestionsList />
 		    </div>
     	);

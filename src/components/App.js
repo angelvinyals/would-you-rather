@@ -24,11 +24,11 @@ class App extends Component {
     		<div>
 		      {authedUser ? (
 		        <Home user={users[authedUser]}/>
-		      ) : (
+		      ) : (		      
 		      	<Login 
 		      		usersArray={usersArray}
 		      		handleClickAvatar={this.handleClickAvatar}
-		      	/>
+		      	/>		     
 		      )}
 		    </div>
     	);
