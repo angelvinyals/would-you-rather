@@ -1,24 +1,94 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import './Home.css';
+import './QuestionsList.css';
 
 class QuestionsList extends Component {	
+    
+    state = { 
+      answered: false 
+    };
+    
+    handleToogle = (e) => {
+       e.preventDefault()
+      this.setState(prevState => ({
+        answered: !prevState.answered
+      }));
+    }
 
+     handleClick = (e,id) => {
+      e.preventDefault()
+      console.log(id)
+    }
+    
+    
   	render() {
-  		const {authedUser} = this.props
+  		const { YesAnsweredId, NotAnsweredId, questions} = this.props
+      const {answered}= this.state
+     
+
     	return (
-    		<div className="home-title">
-    			question list on progress
+    		<div className="questions-container">
+          <h2>Questions List</h2>
+          
+    			<button
+            onClick={this.handleToogle}
+            className='button-answered'
+          >
+            {answered
+              ? <h3>answered</h3>
+              : <h3>NOT answered</h3>
+            }
+          </button>
+          {this.state.answered
+            ? <div>              
+                <ul className='questions-list'>
+                  {YesAnsweredId.map( r=> 
+                      <li key={`answ${r}`}>
+                        <div  onClick={(e)=>this.handleClick(e,r)} className="div-button">
+                          {questions[r].optionOne.text} / {questions[r].optionTwo.text}                            
+                          <hr />
+                        </div>
+                      </li> 
+                    )
+                  }            
+                </ul>
+              </div>
+            
+            :(
+              <div>              
+                <ul className='questions-list'>
+                  {NotAnsweredId.map( r=> 
+                      <li key={`NOTansw${r}`}>
+                        <div onClick={(e)=>this.handleClick(e,r)} className="div-button">
+                          {questions[r].optionOne.text} / {questions[r].optionTwo.text}                           
+                          <hr />
+                        </div>
+                      </li> 
+                    )
+                  }            
+                </ul>               
+              </div>
+            )        
+          }          
 		    </div>
     	);
   	}
 }
 
-function mapStateToProps ({authedUser, questions}) {  
-
+function mapStateToProps ({authedUser, questions, users}) {  
+  const questionsArray= Object.values(questions)
+  const answeredId = Object.keys(users[authedUser].answers)
   return {
-    authedUser,
-    questionsArray:Object.values(questions),
+    questions,
+    sortedQuestionsArray:questionsArray.sort((a, b) => b.timestamp - a.timestamp),
+    YesAnsweredId: answeredId,
+    NotAnsweredId: questionsArray.reduce((acc, q)=> {
+                      answeredId.some( a => a===q.id)
+                          ? null
+                          : acc.push(q.id)
+                      return acc          
+                    },[]) 
+
      
   };
 }
