@@ -15,14 +15,9 @@ class QuestionsList extends Component {
       }));
     }
 
-     handleClick = (e,id) => {
-      e.preventDefault()
-      console.log(id)
-    }
-    
-    
+      
   	render() {
-  		const { YesAnsweredId, NotAnsweredId, questions} = this.props
+  		const { YesAnsweredId, NotAnsweredId, questions , toggleShowQuestionsList} = this.props
       const {answered}= this.state
      
 
@@ -44,7 +39,7 @@ class QuestionsList extends Component {
                 <ul className='questions-list'>
                   {YesAnsweredId.map( r=> 
                       <li key={`answ${r}`}>
-                        <div  onClick={(e)=>this.handleClick(e,r)} className="div-button">
+                        <div  onClick={(e)=>toggleShowQuestionsList(e,r)} className="div-button">
                           {questions[r].optionOne.text} / {questions[r].optionTwo.text}                            
                           <hr />
                         </div>
@@ -59,7 +54,7 @@ class QuestionsList extends Component {
                 <ul className='questions-list'>
                   {NotAnsweredId.map( r=> 
                       <li key={`NOTansw${r}`}>
-                        <div onClick={(e)=>this.handleClick(e,r)} className="div-button">
+                        <div onClick={(e)=>toggleShowQuestionsList(e,r)} className="div-button">
                           {questions[r].optionOne.text} / {questions[r].optionTwo.text}                           
                           <hr />
                         </div>
