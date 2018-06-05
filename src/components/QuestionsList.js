@@ -39,7 +39,7 @@ class QuestionsList extends Component {
                 <ul className='questions-list'>
                   {YesAnsweredId.map( r=> 
                       <li key={`answ${r}`}>
-                        <div  onClick={(e)=>toggleShowQuestionsList(e,r)} className="div-button">
+                        <div  onClick={(e)=>toggleShowQuestionsList(e,r,this.state.answered)} className="div-button">
                           {questions[r].optionOne.text} / {questions[r].optionTwo.text}                            
                           <hr />
                         </div>
@@ -54,7 +54,7 @@ class QuestionsList extends Component {
                 <ul className='questions-list'>
                   {NotAnsweredId.map( r=> 
                       <li key={`NOTansw${r}`}>
-                        <div onClick={(e)=>toggleShowQuestionsList(e,r)} className="div-button">
+                        <div onClick={(e)=>toggleShowQuestionsList(e,r,this.state.answered)} className="div-button">
                           {questions[r].optionOne.text} / {questions[r].optionTwo.text}                           
                           <hr />
                         </div>

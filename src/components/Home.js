@@ -9,22 +9,27 @@ class Home extends Component {
 
     state = { 
       showQuestionsList: true,
-      questionIdForPoll: ''
+      questionIdForPoll: '',
+      
     };
 
-    toggleShowQuestionsList = (e, id) => {
+    toggleShowQuestionsList = (e, id,answered) => {
+
       e.preventDefault()
-      console.log(id)
+
+
       this.setState(prevState => ({
         showQuestionsList: !prevState.showQuestionsList,
-        questionIdForPoll: id
+        questionIdForPoll: id,
+        isQuestionAnswered:answered,
+        
       }));
     }
 
   	render() {
 
   		const {authedUser, usersArray, usersId, user} = this.props
-    	const {showQuestionsList, questionIdForPoll}= this.state
+    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered, answerForPoll}= this.state
 
       return (
     		<div className="home-title">
@@ -38,18 +43,20 @@ class Home extends Component {
 		      <Logout />
           {showQuestionsList 
             ? <QuestionsList toggleShowQuestionsList={this.toggleShowQuestionsList}/>        
-            : <Poll id={questionIdForPoll}/>   
+            : <Poll  id={questionIdForPoll} isAnswered={isQuestionAnswered} />   
 		      }
-        </div>
+        </div> 
     	)
   	}
 }
 
-function mapStateToProps ({authedUser, questions}) {  
+function mapStateToProps ({authedUser, questions},{user}) {  
 
   return {
     authedUser,
     questionsArray:Object.values(questions),
+    answers: user.answers
+
      
   };
 }
