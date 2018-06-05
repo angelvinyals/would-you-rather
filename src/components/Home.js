@@ -16,7 +16,7 @@ class Home extends Component {
 				  	alt="Avatar" 
 				  	className='image-home'
 				  	/>
-		      <h3>Welcome,  {user.name}</h3>
+		      <h5>Welcome,  {user.name}</h5>
 		      <Logout />
 		      <QuestionsList />
 		    </div>
