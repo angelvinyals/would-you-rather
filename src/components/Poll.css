@@ -15,7 +15,7 @@
 }
 
 .column {
-    flex: 20%;
+    flex: 40%;
     padding: 10px;    
     margin: 10px;    
     transition: all 0.3s ease 0s;

@@ -38,7 +38,7 @@ class Poll extends Component {
               <div className="poll-container">
                 <h5>These are the data for this poll</h5>
                 <div className="row">
-                  <div className={answer==="optionOne"? 'columm select' :'columm'}>
+                  <div className={answer==="optionOne"? 'column select' :"column"}>
                     <h4>{question.optionOne.text}</h4>
                     <p>voted by</p>
                     <h3>{votesOptionOne} persons</h3>
@@ -51,7 +51,7 @@ class Poll extends Component {
                     className='image-poll'
                     />
                   </div>
-                  <div className={answer==="optionTwo"? 'columm select' :'columm'}>
+                  <div className={answer==="optionTwo"? "column select" :"column"}>
                     <h4>{question.optionTwo.text}</h4>
                     <p>voted by</p>
                     <h3>{votesOptionTwo} persons</h3>
@@ -63,7 +63,7 @@ class Poll extends Component {
               <div className="poll-container">
                 <h5>Would you rather?....</h5>
                 <div className="row">
-                  <div className="column one" onClick={this.handleVoteOption('optionOne')} param="optionOne">
+                  <div className="column one" onClick={this.handleVoteOption('optionOne')} >
                     <h3>{question.optionOne.text}</h3>
                   </div>
                   <div className='poll-avatar'>
@@ -73,7 +73,7 @@ class Poll extends Component {
                     className='image-poll'
                     />
                   </div>
-                  <div className="column two" >
+                  <div className="column two" onClick={this.handleVoteOption('optionTwo')}>
                     <h3>{question.optionTwo.text}</h3>
                   </div>
                 </div>
