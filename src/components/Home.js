@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import QuestionsList from './QuestionsList'
 import Poll from './Poll'
 import Logout from './Logout'
+import NewPoll from  './NewPoll'
 import './Home.css';
 
 class Home extends Component {	
@@ -28,8 +29,8 @@ class Home extends Component {
 
   	render() {
 
-  		const {authedUser, usersArray, usersId, user} = this.props
-    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered, answerForPoll}= this.state
+  		const { user} = this.props
+    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered}= this.state
 
       return (
     		<div className="home-title">
@@ -41,6 +42,7 @@ class Home extends Component {
 				  	/>
 		      <h5>Welcome,  {user.name}</h5>
 		      <Logout />
+          <NewPoll user={user} />
           {showQuestionsList 
             ? <QuestionsList toggleShowQuestionsList={this.toggleShowQuestionsList}/>        
             : <Poll  id={questionIdForPoll} isAnswered={isQuestionAnswered} />   

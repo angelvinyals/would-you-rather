@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { AddvoteQuestionToUser } from  '../actions/users'
 import { handleSaveAnswer } from '../actions/shared'
 
 import './Poll.css';
@@ -33,7 +32,7 @@ class Poll extends Component {
     
   	render() {
   		
-      const {id, question, avatarURLAuthor,isAnswered,answer,votesOptionOne, votesOptionTwo, percentatgeOptionOne, percentatgeOptionTwo} =this.props 
+      const {question, avatarURLAuthor,answer,votesOptionOne, votesOptionTwo, percentatgeOptionOne, percentatgeOptionTwo} =this.props 
       const {isAnsweredState} = this.state  
       console.log(answer)
     	return (
@@ -101,8 +100,8 @@ function mapStateToProps ({authedUser, questions, users},{id,isAnswered}) {
     answer: answersIdArray.some(answId => id===answId) ? users[author].answers[id] : '',
     votesOptionOne: question.optionOne['votes'].length,
     votesOptionTwo: question.optionTwo['votes'].length,
-    percentatgeOptionOne: parseInt(question.optionOne['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100,
-    percentatgeOptionTwo: parseInt(question.optionTwo['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100
+    percentatgeOptionOne: question.optionOne['votes'].length!==0 ? parseInt(question.optionOne['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100 : 0,
+    percentatgeOptionTwo: question.optionTwo['votes'].length!==0 ? parseInt(question.optionTwo['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100 : 0,
 
 
   };

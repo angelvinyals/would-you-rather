@@ -20,7 +20,7 @@ class App extends Component {
 	}
 
   	render() {
-  		const {authedUser, usersArray, usersId, users} = this.props
+  		const {authedUser, usersArray, users} = this.props
     	return (
     		<div>
     		<LoadingBar />
