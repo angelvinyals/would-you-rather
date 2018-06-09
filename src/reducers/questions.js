@@ -1,5 +1,5 @@
-import {RECEIVE_QUESTIONS} from '../actions/questions'
-import {SAVE_QUESTION_ANSWER} from '../actions/shared'
+import { RECEIVE_QUESTIONS } from '../actions/questions'
+import { SAVE_QUESTION_ANSWER , SAVE_QUESTION } from '../actions/shared'
 
 export default function questions(state = {}, action){
 	switch(action.type){
@@ -19,8 +19,20 @@ export default function questions(state = {}, action){
 			        }
 			    }
 			}
+		case SAVE_QUESTION: 
+			return {
+				...state,
+				[action.id]: {
+					id:action.id, 
+					timestamp: action.timestamp, 
+					author:action.author, 
+					optionOne: action.optionOne, 
+					optionTwo: action.optionTwo
+				}		    
+			}
 		default :
 			return state
 		
 	}
 }
+

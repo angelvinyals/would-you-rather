@@ -7,7 +7,7 @@ class Login extends Component {
 		const {usersArray, handleClickAvatar} = this.props
 		return (
 		    <div className='text-init'>
-		        <p>Click avatar to login</p>
+		        <p>Click avatar to login to accesss the poll</p>
 		        <ul className='users-list'>
 		        {usersArray.map(user =>{
 		        	return (

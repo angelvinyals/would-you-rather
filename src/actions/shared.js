@@ -2,9 +2,11 @@ import { getInitialData } from '../utils/api'
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { _saveQuestionAnswer } from  '../utils/_DATA'
+import { _saveQuestionAnswer, _saveQuestion } from  '../utils/_DATA'
+
 
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTON_ANSWER'
+export const SAVE_QUESTION = 'SAVE_QUESTION'
 
 export function handleInitialData () {
 	return (dispatch)=>{
@@ -32,10 +34,38 @@ export function handleSaveAnswer(info){
 		dispatch(saveQAnswer(info))
 
 		return _saveQuestionAnswer(info)
+			
 			.catch((e)=>{
-				console.warm('Error in handleSaveAnswer:',e)
+				console.warn('Error in handleSaveAnswer:',e)
 				dispatch(saveQAnswer(info))
 				alert ('There was an error liking the answer. Try again ')	
+			})
+	}
+}
+
+
+
+function saveQuestion ({ id, timestamp, author,  optionOne, optionTwo}) {
+	return{
+		type: SAVE_QUESTION,
+		id,
+		timestamp,
+		author,
+		optionOne,
+		optionTwo
+	}	
+}
+
+export function handleSaveQuestion(question){
+	return (dispatch ) =>{
+		
+
+		return _saveQuestion (question)
+			.then(res => dispatch(saveQuestion(res)))
+			.catch((e)=>{
+				console.warm('Error in handleSaveQuestion:',e)
+				dispatch(saveQuestion(question))
+				alert ('There was an error linking new question. Try again ')	
 			})
 	}
 }
