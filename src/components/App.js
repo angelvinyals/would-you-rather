@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import { setAuthedUser } from '../actions/authedUser'
 import Login from  './Login'
 import Home from  './Home'
+import LoadingBar from 'react-redux-loading'
 import './App.css';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
   		const {authedUser, usersArray, usersId, users} = this.props
     	return (
     		<div>
+    		<LoadingBar />
 		      {authedUser ? (
 		        <Home user={users[authedUser]}/>
 		      ) : (		      
