@@ -23,15 +23,7 @@ class Poll extends Component {
         authedUser,
         answer,
       }))
-      /*
-      this.props.dispatch(
-        AddvoteQuestionToUser ({
-          authedUser:this.props.authedUser,
-          qid:this.props.id,
-          answer:option
-        })
-      )
-      */
+      
       this.setState({
         isAnsweredState:true,
         answer,
