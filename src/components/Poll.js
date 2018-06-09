@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {AddvoteQuestionToUser} from  '../actions/users'
+import { AddvoteQuestionToUser } from  '../actions/users'
+import { handleSaveAnswer } from '../actions/shared'
 
 import './Poll.css';
 
@@ -11,9 +12,18 @@ class Poll extends Component {
       answer: this.props.answer
     };
 
-    handleVoteOption = (option) => (e) =>{
+    handleVoteOption = (answer) => (e) =>{
       e.preventDefault()
-      console.log(this.props.id, option)
+
+      const {dispatch, authedUser, id  }= this.props
+      console.log( authedUser, id, answer)
+
+      dispatch(handleSaveAnswer({
+        qid:id,
+        authedUser,
+        answer,
+      }))
+      /*
       this.props.dispatch(
         AddvoteQuestionToUser ({
           authedUser:this.props.authedUser,
@@ -21,10 +31,12 @@ class Poll extends Component {
           answer:option
         })
       )
+      */
       this.setState({
         isAnsweredState:true,
-        answer:this.props.option
+        answer,
       })
+      
     }
     
   	render() {

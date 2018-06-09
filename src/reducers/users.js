@@ -3,6 +3,8 @@ import {
 	VOTE_QUESTION,
 	} from '../actions/users'
 
+import {SAVE_QUESTION_ANSWER} from '../actions/shared'
+
 export default function users(state = {}, action){
 	switch(action.type){
 		case RECEIVE_USERS: 
@@ -10,7 +12,7 @@ export default function users(state = {}, action){
 				...state,
 				...action.users
 			}
-		case VOTE_QUESTION: 
+		case SAVE_QUESTION_ANSWER: 
 			return {
 				...state,
 				[action.authedUser]: {
@@ -27,3 +29,4 @@ export default function users(state = {}, action){
 		
 	}
 }
+

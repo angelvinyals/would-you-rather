@@ -1,5 +1,5 @@
 import {RECEIVE_QUESTIONS} from '../actions/questions'
-import {VOTE_QUESTION} from '../actions/users'
+import {SAVE_QUESTION_ANSWER} from '../actions/shared'
 
 export default function questions(state = {}, action){
 	switch(action.type){
@@ -8,7 +8,7 @@ export default function questions(state = {}, action){
 				...state,
 				...action.questions
 			}
-		case VOTE_QUESTION: 
+		case SAVE_QUESTION_ANSWER: 
 			return {
 				...state,
 				[action.qid]: {
