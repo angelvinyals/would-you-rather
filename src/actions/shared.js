@@ -57,11 +57,11 @@ function saveQuestion ({ id, timestamp, author,  optionOne, optionTwo}) {
 }
 
 export function handleSaveQuestion(question){
-	return (dispatch ) =>{
-		
-
+	return (dispatch ) =>{		
+		dispatch(showLoading())
 		return _saveQuestion (question)
 			.then(res => dispatch(saveQuestion(res)))
+			.then(()=> dispatch(hideLoading()))
 			.catch((e)=>{
 				console.warm('Error in handleSaveQuestion:',e)
 				dispatch(saveQuestion(question))
