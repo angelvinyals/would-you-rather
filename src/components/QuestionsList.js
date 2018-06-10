@@ -78,9 +78,9 @@ function mapStateToProps ({authedUser, questions, users}) {
     sortedQuestionsArray:questionsArray.sort((a, b) => b.timestamp - a.timestamp),
     YesAnsweredId: answeredId,
     NotAnsweredId: questionsArray.reduce((acc, q)=> {
-                      answeredId.some( a => a===q.id)
-                          ? null
-                          : acc.push(q.id)
+                      acc= answeredId.some( a => a===q.id)
+                          ? acc
+                          : acc.concat(q.id)
                       return acc          
                     },[]) 
 

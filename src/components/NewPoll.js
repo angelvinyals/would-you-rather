@@ -62,10 +62,7 @@ class NewPoll extends Component {
  
 	render() {
 
-		const {authedUser,user} = this.props
-  	
-
-    return (
+		return (
   		<div className="newpoll-title">
   			<h2>Add a New Poll</h2>
   			<form onSubmit={this.handleSubmit}>

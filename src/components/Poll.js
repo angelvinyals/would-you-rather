@@ -100,8 +100,8 @@ function mapStateToProps ({authedUser, questions, users},{id,isAnswered}) {
     answer: answersIdArray.some(answId => id===answId) ? users[author].answers[id] : '',
     votesOptionOne: question.optionOne['votes'].length,
     votesOptionTwo: question.optionTwo['votes'].length,
-    percentatgeOptionOne: question.optionOne['votes'].length!==0 ? parseInt(question.optionOne['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100 : 0,
-    percentatgeOptionTwo: question.optionTwo['votes'].length!==0 ? parseInt(question.optionTwo['votes'].length)/(parseInt(question.optionOne['votes'].length)+parseInt(question.optionTwo['votes'].length))*100 : 0,
+    percentatgeOptionOne: parseInt(question.optionOne['votes'].length, 10)/(parseInt(question.optionOne['votes'].length, 10)+parseInt(question.optionTwo['votes'].length, 10))*100 ,
+    percentatgeOptionTwo: parseInt(question.optionTwo['votes'].length, 10)/(parseInt(question.optionOne['votes'].length, 10)+parseInt(question.optionTwo['votes'].length, 10))*100 ,
 
 
   };
