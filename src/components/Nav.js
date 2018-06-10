@@ -1,0 +1,26 @@
+import React, { Component } from 'react';
+import { NavLink } from  'react-router-dom'
+
+export default function Nav() {
+	return (
+		<nav classname='nav'>
+			<ul>
+				<li>
+					<NavLink to='/' exact activeClassName='active'>
+						Home
+					</NavLink>
+				</li>
+				<li>
+					<NavLink to='/add' exact activeClassName='active'>
+						Add New poll
+					</NavLink>
+				</li>
+				<li>
+					<NavLink to='/leaderboard' exact activeClassName='active'>
+						Leaderboard
+					</NavLink>
+				</li>
+			</ul>
+		</nav>
+	)
+}
