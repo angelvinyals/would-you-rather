@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch,
+  Redirect 
+} from "react-router-dom";
 import './QuestionsList.css';
 
 class QuestionsList extends Component {	
@@ -17,9 +23,10 @@ class QuestionsList extends Component {
 
       
   	render() {
-  		const { YesAnsweredId, NotAnsweredId, questions , toggleShowQuestionsList} = this.props
+  		const { YesAnsweredId, NotAnsweredId, questions , toggleShowQuestionsList, match} = this.props
       const {answered}= this.state
-     
+      const questionsList = answered ? YesAnsweredId : NotAnsweredId 
+      console.log (questionsList)
 
     	return (
     		<div className="questions-container">
@@ -29,15 +36,22 @@ class QuestionsList extends Component {
             onClick={this.handleToogle}
             className='button-answered'
           >
-            {answered
-              ? <h3>answered</h3>
-              : <h3>NOT answered</h3>
-            }
-          </button>
-          {this.state.answered
-            ? <div>              
+
+          {answered
+            ? <h3>answered</h3>
+            : <h3>NOT answered</h3>
+          }
+
+          </button> 
+
+          <Redirect push to={`${match.url}/${answered}`}/> 
+
+          <Route               
+            path={`${match.url}/${answered}`}
+            render={({ match }) =>           
+              <div>              
                 <ul className='questions-list'>
-                  {YesAnsweredId.map( r=> 
+                  {questionsList.map( r=> 
                       <li key={`answ${r}`}>
                         <div  onClick={(e)=>toggleShowQuestionsList(e,r,this.state.answered)} className="div-button">
                           {questions[r].optionOne.text} / {questions[r].optionTwo.text}                            
@@ -47,24 +61,9 @@ class QuestionsList extends Component {
                     )
                   }            
                 </ul>
-              </div>
-            
-            :(
-              <div>              
-                <ul className='questions-list'>
-                  {NotAnsweredId.map( r=> 
-                      <li key={`NOTansw${r}`}>
-                        <div onClick={(e)=>toggleShowQuestionsList(e,r,this.state.answered)} className="div-button">
-                          {questions[r].optionOne.text} / {questions[r].optionTwo.text}                           
-                          <hr />
-                        </div>
-                      </li> 
-                    )
-                  }            
-                </ul>               
-              </div>
-            )        
-          }          
+              </div> 
+            }
+          />
 		    </div>
     	);
   	}

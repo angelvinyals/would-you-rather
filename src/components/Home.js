@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch,
+  Redirect 
+} from "react-router-dom";
 import QuestionsList from './QuestionsList'
 import Poll from './Poll'
 import Logout from './Logout'
@@ -29,7 +35,7 @@ class Home extends Component {
 
   	render() {
 
-  		const { user} = this.props
+  		const { user, match} = this.props
     	const {showQuestionsList, questionIdForPoll,isQuestionAnswered}= this.state
 
       return (
@@ -43,10 +49,35 @@ class Home extends Component {
 		      <h5>Welcome,  {user.name}</h5>
 		      <Logout />
           <NewPoll user={user} />
+
           {showQuestionsList 
-            ? <QuestionsList toggleShowQuestionsList={this.toggleShowQuestionsList}/>        
-            : <Poll  id={questionIdForPoll} isAnswered={isQuestionAnswered} />   
+            ? <Redirect to={`${match.url}/questions`}/>                  
+            : <Redirect to={`${match.url}/poll`}/> 
 		      }
+          <Switch>
+            <Route 
+              
+              path={`${match.url}/poll`}
+              render={({ match }) =>           
+                <Poll 
+                  match={match} 
+                  id={questionIdForPoll} 
+                  isAnswered={isQuestionAnswered} 
+                /> 
+              }
+            />
+            <Route 
+              
+              path={`${match.url}/questions`}
+              render={({ match }) =>           
+                <QuestionsList 
+                  match={match}
+                  toggleShowQuestionsList={this.toggleShowQuestionsList}
+                />
+              }
+            />
+            
+          </Switch>
         </div> 
     	)
   	}
