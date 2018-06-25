@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import QuestionsList from './QuestionsList'
 import Poll from './Poll'
+import Nav from './Nav'
 import Logout from './Logout'
 import NewPoll from  './NewPoll'
 import './Home.css';
@@ -47,8 +48,9 @@ class Home extends Component {
 				  	className='image-home'
 				  	/>
 		      <h5>Welcome,  {user.name}</h5>
+          <Nav />
 		      <Logout />
-          <NewPoll user={user} />
+          
 
           {showQuestionsList 
             ? <Redirect to={`${match.url}/questions`}/>                  

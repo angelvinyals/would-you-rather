@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { NavLink } from  'react-router-dom'
+import { 
+  Route, 
+  Switch,
+  NavLink,
+  Redirect 
+} from "react-router-dom";
+import Home from  './Home'
+import NewPoll from  './NewPoll'
+import LeaderBoard from  './LeaderBoard'
 
 export default function Nav() {
 	return (
+		<div>
 		<nav classname='nav'>
 			<ul>
 				<li>
@@ -22,5 +31,15 @@ export default function Nav() {
 				</li>
 			</ul>
 		</nav>
+
+		<Switch>
+            <Route  exact path="/"  component={Home}/>
+            <Route   path="/add"  component={NewPoll}/>
+            <Route   path="/leaderboard"  component={LeaderBoard}/>
+
+                   
+          </Switch>
+          </div>
+
 	)
 }
