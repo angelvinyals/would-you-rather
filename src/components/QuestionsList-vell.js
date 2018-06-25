@@ -4,10 +4,8 @@ import {
   BrowserRouter as Router, 
   Route, 
   Switch,
-  Link,
   Redirect 
 } from "react-router-dom";
-import Poll from  './Poll'
 import './QuestionsList.css';
 
 class QuestionsList extends Component {	
@@ -38,24 +36,34 @@ class QuestionsList extends Component {
             onClick={this.handleToogle}
             className='button-answered'
           >
-            {answered
-              ? <h3>answered</h3>
-              : <h3>NOT answered</h3>
-            }
+
+          {answered
+            ? <h3>answered</h3>
+            : <h3>NOT answered</h3>
+          }
+
           </button> 
 
-          <ul className='questions-list'>
-            {questionsList.map( id=> 
-                <li key={`q${id}`}>
-                  <Link to={`${match.url}/${id}`}>
-                    {questions[id].optionOne.text} / {questions[id].optionTwo.text}     
-                  </Link>
-                </li> 
-              )
-            }            
-          </ul> 
-          
-            
+          <Redirect push to={`${match.url}/${answered}`}/> 
+
+          <Route               
+            path={`${match.url}/${answered}`}
+            render={({ match }) =>           
+              <div>              
+                <ul className='questions-list'>
+                  {questionsList.map( r=> 
+                      <li key={`answ${r}`}>
+                        <div  onClick={(e)=>toggleShowQuestionsList(e,r,this.state.answered)} className="div-button">
+                          {questions[r].optionOne.text} / {questions[r].optionTwo.text}                            
+                          <hr />
+                        </div>
+                      </li> 
+                    )
+                  }            
+                </ul>
+              </div> 
+            }
+          />
 		    </div>
     	);
   	}

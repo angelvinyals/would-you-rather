@@ -55,9 +55,8 @@ class Home extends Component {
             : <Redirect to={`${match.url}/poll`}/> 
 		      }
           <Switch>
-            <Route 
-              
-              path={`${match.url}/poll`}
+            <Route               
+              exact path={`${match.url}/poll`}
               render={({ match }) =>           
                 <Poll 
                   match={match} 
@@ -66,8 +65,10 @@ class Home extends Component {
                 /> 
               }
             />
-            <Route 
-              
+
+            <Route  path={`${match.url}/questions/:questionId`} component={Poll}/>   
+
+            <Route               
               path={`${match.url}/questions`}
               render={({ match }) =>           
                 <QuestionsList 
@@ -75,8 +76,7 @@ class Home extends Component {
                   toggleShowQuestionsList={this.toggleShowQuestionsList}
                 />
               }
-            />
-            
+            />            
           </Switch>
         </div> 
     	)

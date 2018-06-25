@@ -7,8 +7,8 @@ import './Poll.css';
 class Poll extends Component {	 
 
     state = { 
-      isAnsweredState: this.props.isAnswered,
-      answer: this.props.answer
+      isAnsweredState: false,
+     
     };
 
     handleVoteOption = (answer) => (e) =>{
@@ -32,35 +32,16 @@ class Poll extends Component {
     
   	render() {
   		
-      const {question, avatarURLAuthor,answer,votesOptionOne, votesOptionTwo, percentatgeOptionOne, percentatgeOptionTwo} =this.props 
-      const {isAnsweredState} = this.state  
-      console.log(answer)
+      const {questions,match,question, avatarURLAuthor } =this.props 
+      const {isAnsweredState} = this.state       
+
+      
     	return (
         <div>
           {isAnsweredState ? (
               <div className="poll-container">
                 <h5>These are the data for this poll</h5>
-                <div className="row">
-                  <div className={answer==="optionOne"? 'column select' :"column"}>
-                    <h4>{question.optionOne.text}</h4>
-                    <p>voted by</p>
-                    <h3>{votesOptionOne} persons</h3>
-                    <h1>{percentatgeOptionOne}%</h1>
-                  </div>
-                  <div className='poll-avatar'>
-                    <img 
-                    src={avatarURLAuthor} 
-                    alt="Avatar" 
-                    className='image-poll'
-                    />
-                  </div>
-                  <div className={answer==="optionTwo"? "column select" :"column"}>
-                    <h4>{question.optionTwo.text}</h4>
-                    <p>voted by</p>
-                    <h3>{votesOptionTwo} persons</h3>
-                    <h1>{percentatgeOptionTwo}%</h1>
-                  </div>
-                </div>
+                
               </div>
             ):(
               <div className="poll-container">
@@ -89,21 +70,15 @@ class Poll extends Component {
   	}
 }
 
-function mapStateToProps ({authedUser, questions, users},{id,isAnswered}) {  
-  const question= questions[id]
-  const author= questions[id].author
-  const answersIdArray= Object.keys(users[authedUser].answers)
-  return {
-    authedUser,
+function mapStateToProps ({authedUser, questions, users},{match}) {  
+  const question= questions[match.params.questionId]
+  const author= question.author
+  
+  return {   
+    questions: questions,
     question: question,
     avatarURLAuthor: users[author].avatarURL,
-    answer: answersIdArray.some(answId => id===answId) ? users[author].answers[id] : '',
-    votesOptionOne: question.optionOne['votes'].length,
-    votesOptionTwo: question.optionTwo['votes'].length,
-    percentatgeOptionOne: parseInt(question.optionOne['votes'].length, 10)/(parseInt(question.optionOne['votes'].length, 10)+parseInt(question.optionTwo['votes'].length, 10))*100 ,
-    percentatgeOptionTwo: parseInt(question.optionTwo['votes'].length, 10)/(parseInt(question.optionOne['votes'].length, 10)+parseInt(question.optionTwo['votes'].length, 10))*100 ,
-
-
+  
   };
 }
 
