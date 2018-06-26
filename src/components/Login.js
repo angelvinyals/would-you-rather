@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { setAuthedUser } from '../actions/authedUser'
 
 
 class Login extends Component {
+
+	handleClickAvatar = (e, id) =>{
+		e.preventDefault()
+		this.props.dispatch(setAuthedUser(id))
+	}
 	
   	render() {
-		const {usersArray, handleClickAvatar} = this.props
+		const {usersArray, authedUser} = this.props
+
+		if(authedUser) {return <Redirect to={`/${authedUser}`} />}
+
 		return (
 		    <div className='text-init'>
 		        <p>Click avatar to login to accesss the poll</p>
@@ -12,7 +23,7 @@ class Login extends Component {
 		        {usersArray.map(user =>{
 		        	return (
 		        		<li key={user.id}>
-		        			<div className="responsive" onClick={(e) => handleClickAvatar(e, user.id)}>
+		        			<div className="responsive" onClick={(e) => this.handleClickAvatar(e, user.id)}>
 	  							<div className="container">
 								  <img 
 								  	src={user.avatarURL} 
@@ -35,5 +46,16 @@ class Login extends Component {
 }
 
 
+function mapStateToProps ({authedUser, users}) {  
 
-export default Login;
+  return {
+    authedUser,
+    users,
+    usersArray:Object.values(users),
+    usersId:Object.keys(users),    
+  };
+}
+
+
+export default connect(mapStateToProps)(Login);
+
