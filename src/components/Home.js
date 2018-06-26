@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { 
-  Route, 
-  Switch,
-  Redirect 
-} from "react-router-dom";
-import QuestionsList from './QuestionsList'
+import { Route,Switch } from "react-router-dom";
 import Poll from './Poll'
+import QuestionsList from './QuestionsList'
 import Nav from './Nav'
-
 import NewPoll from  './NewPoll'
 import LeaderBoard from  './LeaderBoard'
 import './Home.css';
 
 class Home extends Component {	
-
-    state = {       
-      questionIdForPoll: '',      
-    };
-
     
   	render() {
 
   		const { user, match} = this.props
-    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered,avatarURL}= this.state
 
       return (
     		<div className="home-title">
@@ -38,8 +27,8 @@ class Home extends Component {
                     
           <Switch>
             <Route  path={`${match.url}/add`}  component={NewPoll}/>
-            <Route  path={`${match.url}/leaderboard`}  component={LeaderBoard}/>            
-            <Route  path={`${match.url}/questions/:questionId`} component={Poll}/> 
+            <Route  path={`${match.url}/leaderboard`}  component={LeaderBoard}/>
+            <Route  path={`${match.url}/:questionId`} component={Poll}/>            
             <Route  path={`${match.url}/`} component={QuestionsList}/>             
           </Switch>
         </div> 
@@ -48,17 +37,11 @@ class Home extends Component {
 }
 
 function mapStateToProps ({authedUser, questions, users}) {  
-   
-  const user = users[authedUser]
-
+  
   return {
     authedUser,
-    questionsArray:Object.values(questions),
-    user: user
-
-     
+    user: users[authedUser]     
   };
 }
-
 
 export default connect(mapStateToProps)(Home);
