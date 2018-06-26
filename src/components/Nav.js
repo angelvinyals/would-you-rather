@@ -25,5 +25,4 @@ const NavLink = (props) => (
   </li>
 )
 
-let styles = {}
 
