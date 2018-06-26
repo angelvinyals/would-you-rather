@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import {   Redirect } from "react-router-dom";
 import {setAuthedUser} from '../actions/authedUser'
 
 
-const Logout = ({dispatch}) => (
-	<Fragment>
-		dispatch(setAuthedUser(null))
-		<Redirect to="/login"/>
-	</Fragment>
-)
+const Logout = ({dispatch, history}) => {
+	dispatch(setAuthedUser(null))
+	history.push("/")
+	return(
+		<div>bye...</div>
+	)
+}
 
 export default connect()(Logout);

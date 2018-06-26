@@ -1,27 +1,18 @@
-import React, { Component } from 'react';
-import { 
-  Route, 
-  Switch,
-  Link,
-  Redirect 
-} from "react-router-dom";
-import Home from  './Home'
-import Logout from  './Logout'
-import NewPoll from  './NewPoll'
-import LeaderBoard from  './LeaderBoard'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Nav({match}) {
 	return (
 		<div>
 			<nav  style={styles.fill}>
 				<ul style={styles.nav}>				
-					<NavLink exact to={`${match.url}/`}>Home</NavLink>
-					<NavLink exact to={`${match.url}/add`}>Add New poll</NavLink>
-					<NavLink exact to={`${match.url}/leaderboard`}>Leaderboard</NavLink>
-					<NavLink exact to={`${match.url}/logout`}>Log out</NavLink>
+					<NavLink  to={`${match.url}/questions`}>Home</NavLink>
+					<NavLink  to={`${match.url}/add`}>Add New poll</NavLink>
+					<NavLink  to={`${match.url}/leaderboard`}>Leaderboard</NavLink>
+					<NavLink  to={`/logout`}>Log out</NavLink>
 				</ul>
 			</nav>		
-	        <Route  exact path="/"  component={Home}/>
+	        
 	        
 	    </div>
 	)
