@@ -18,22 +18,19 @@ import './App.css';
 class App extends Component {
 
 	componentDidMount (){
-		//console.log('...componetDidMount')
 		this.props.dispatch(handleInitialData())
 		return <Redirect to={`/login`}/>
 	}	
 
 	render() {
-  		const {authedUser, usersArray, users} = this.props
+  		const {authedUser} = this.props
 
     	return (
     		<Router>
 	    		<div>
-		    		<LoadingBar />
-		    		
-				    <Switch>
-					    
-				        <Route path={`/${authedUser}`} component={Home}/>
+		    		<LoadingBar />		    		
+				    <Switch>					    
+				        <Route path={`/${authedUser}/questions`} component={Home}/>
 					 	<Route path="/logout"  component={Logout}/>
 						<Route path="/login" component={Login} />
 						<Route path="/" component={Login} />						
@@ -45,15 +42,11 @@ class App extends Component {
   	}
 }
 
-function mapStateToProps ({authedUser, users}) {  
+function mapStateToProps ({authedUser}) {  
 
   return {
-    authedUser,
-    users,
-    usersArray:Object.values(users),
-    usersId:Object.keys(users),    
+    authedUser,        
   };
 }
-
 
 export default connect(mapStateToProps)(App);
