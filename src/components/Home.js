@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { 
-  BrowserRouter as Router, 
   Route, 
   Switch,
   Redirect 
@@ -9,36 +8,22 @@ import {
 import QuestionsList from './QuestionsList'
 import Poll from './Poll'
 import Nav from './Nav'
-import Logout from './Logout'
+
 import NewPoll from  './NewPoll'
 import LeaderBoard from  './LeaderBoard'
 import './Home.css';
 
 class Home extends Component {	
 
-    state = { 
-      showQuestionsList: true,
-      questionIdForPoll: '',
-      
+    state = {       
+      questionIdForPoll: '',      
     };
 
-    toggleShowQuestionsList = (e, id,answered) => {
-
-      e.preventDefault()
-
-
-      this.setState(prevState => ({
-        showQuestionsList: !prevState.showQuestionsList,
-        questionIdForPoll: id,
-        isQuestionAnswered:answered,
-        
-      }));
-    }
-
+    
   	render() {
 
   		const { user, match} = this.props
-    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered}= this.state
+    	const {showQuestionsList, questionIdForPoll,isQuestionAnswered,avatarURL}= this.state
 
       return (
     		<div className="home-title">
@@ -49,51 +34,27 @@ class Home extends Component {
 				  	className='image-home'
 				  	/>
 		      <h5>Welcome,  {user.name}</h5>
-          <Nav match={match}/>
-		      
-          
-
-          {showQuestionsList 
-            ? <Redirect to={`${match.url}/questions`}/>                  
-            : <Redirect to={`${match.url}/poll`}/> 
-		      }
+          <Nav match={match}/>          
+                    
           <Switch>
-            <Route               
-              exact path={`${match.url}/poll`}
-              render={({ match }) =>           
-                <Poll 
-                  match={match} 
-                  id={questionIdForPoll} 
-                  isAnswered={isQuestionAnswered} 
-                /> 
-              }
-            />
-            <Route   path={`${match.url}/add`}  component={NewPoll}/>
-            <Route   path={`${match.url}/leaderboard`}  component={LeaderBoard}/>
-            <Route   path={`${match.url}/logout`}  component={Logout}/>
-            <Route  path={`${match.url}/questions/:questionId`} component={Poll}/>   
-
-            <Route               
-              path={`${match.url}/questions`}
-              render={({ match }) =>           
-                <QuestionsList 
-                  match={match}
-                  toggleShowQuestionsList={this.toggleShowQuestionsList}
-                />
-              }
-            />            
+            <Route  path={`${match.url}/add`}  component={NewPoll}/>
+            <Route  path={`${match.url}/leaderboard`}  component={LeaderBoard}/>            
+            <Route  path={`${match.url}/questions/:questionId`} component={Poll}/> 
+            <Route  path={`${match.url}/`} component={QuestionsList}/>             
           </Switch>
         </div> 
     	)
   	}
 }
 
-function mapStateToProps ({authedUser, questions},{user}) {  
+function mapStateToProps ({authedUser, questions, users}) {  
+   
+  const user = users[authedUser]
 
   return {
     authedUser,
     questionsArray:Object.values(questions),
-    answers: user.answers
+    user: user
 
      
   };
