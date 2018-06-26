@@ -6,7 +6,7 @@ export default function Nav({match}) {
 		<div>
 			<nav  style={styles.fill}>
 				<ul style={styles.nav}>				
-					<NavLink  to={`${match.url}/questions`}>Home</NavLink>
+					<NavLink  to={`${match.url}`}>Home</NavLink>
 					<NavLink  to={`${match.url}/add`}>Add New poll</NavLink>
 					<NavLink  to={`${match.url}/leaderboard`}>Leaderboard</NavLink>
 					<NavLink  to={`/logout`}>Log out</NavLink>
