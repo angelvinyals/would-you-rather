@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
+
 import './QuestionsList.css';
 
 class QuestionsList extends Component {	
@@ -48,7 +49,7 @@ class QuestionsList extends Component {
               )
             }            
           </ul> 
-          
+           
             
 		    </div>
     	);
