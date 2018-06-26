@@ -32,7 +32,7 @@ class Poll extends Component {
     
   	render() {
   		
-      const {questions,match,question, avatarURLAuthor } =this.props 
+      const {question, avatarURLAuthor } =this.props 
       const {isAnsweredState} = this.state       
 
       
@@ -78,6 +78,9 @@ function mapStateToProps ({authedUser, questions, users},{match}) {
     questions: questions,
     question: question,
     avatarURLAuthor: users[author].avatarURL,
+    isAnsweredState: Object.keys(users[authedUser].answers).find(match.params.questionId) 
+                      ? true
+                      : false,
   
   };
 }
