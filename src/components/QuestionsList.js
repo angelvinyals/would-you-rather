@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Switch,
-  Link,
-  Redirect 
-} from "react-router-dom";
-import Poll from  './Poll'
+import { Link } from "react-router-dom";
 import './QuestionsList.css';
 
 class QuestionsList extends Component {	
     
     state = { 
-      answered: false 
+      answered: false,
+      showQuestionsList: true,
     };
     
     handleToogle = (e) => {
@@ -23,14 +17,14 @@ class QuestionsList extends Component {
       }));
     }
 
-      
+
   	render() {
-  		const { YesAnsweredId, NotAnsweredId, questions , toggleShowQuestionsList, match} = this.props
+  		const { YesAnsweredId, NotAnsweredId, questions, match} = this.props
       const {answered}= this.state
       const questionsList = answered ? YesAnsweredId : NotAnsweredId 
       console.log (questionsList)
 
-    	return (
+      return (
     		<div className="questions-container">
           <h2>Questions List</h2>
           
