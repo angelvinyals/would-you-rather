@@ -14,7 +14,7 @@ class Login extends Component {
   	render() {
 		const {usersArray, authedUser} = this.props
 
-		if(authedUser) {return <Redirect to={`/${authedUser}`} />}
+		if(authedUser) {return <Redirect to={`/${authedUser}/questions`} />}
 
 		return (
 		    <div className='text-init'>
