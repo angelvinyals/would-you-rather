@@ -11,6 +11,7 @@ import Poll from './Poll'
 import Nav from './Nav'
 import Logout from './Logout'
 import NewPoll from  './NewPoll'
+import LeaderBoard from  './LeaderBoard'
 import './Home.css';
 
 class Home extends Component {	
@@ -48,8 +49,8 @@ class Home extends Component {
 				  	className='image-home'
 				  	/>
 		      <h5>Welcome,  {user.name}</h5>
-          <Nav />
-		      <Logout />
+          <Nav match={match}/>
+		      
           
 
           {showQuestionsList 
@@ -67,7 +68,9 @@ class Home extends Component {
                 /> 
               }
             />
-
+            <Route   path={`${match.url}/add`}  component={NewPoll}/>
+            <Route   path={`${match.url}/leaderboard`}  component={LeaderBoard}/>
+            <Route   path={`${match.url}/logout`}  component={Logout}/>
             <Route  path={`${match.url}/questions/:questionId`} component={Poll}/>   
 
             <Route               

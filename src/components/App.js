@@ -11,8 +11,7 @@ import { setAuthedUser } from '../actions/authedUser'
 import Login from  './Login'
 import Home from  './Home'
 import NoMatch from './NoMatch'
-import NewPoll from  './NewPoll'
-import LeaderBoard from  './LeaderBoard'
+
 import LoadingBar from 'react-redux-loading'
 import './App.css';
 
@@ -56,8 +55,7 @@ class App extends Component {
 						      	/>
 						    }
 						/>
-						<Route   path="/add"  component={NewPoll}/>
-            			<Route   path="/leaderboard"  component={LeaderBoard}/>
+						
 						<Route component={NoMatch} />
 					</Switch>		
 			    </div>
