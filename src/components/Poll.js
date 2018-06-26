@@ -1,87 +1,128 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleSaveAnswer } from '../actions/shared'
-
 import './Poll.css';
 
-class Poll extends Component {	 
+class Poll extends Component {	
 
-    state = { 
-      isAnsweredState: false,
-     
-    };
+  handleVoteOption = (answer) => (e) =>{
+    e.preventDefault()
 
-    handleVoteOption = (answer) => (e) =>{
-      e.preventDefault()
+    const {dispatch, authedUser, qId  }= this.props
+    console.log( authedUser, qId, answer)
 
-      const {dispatch, authedUser, id  }= this.props
-      console.log( authedUser, id, answer)
-
-      dispatch(handleSaveAnswer({
-        qid:id,
-        authedUser,
-        answer,
-      }))
+    dispatch(handleSaveAnswer({
+      qid:qId,
+      authedUser,
+      answer,
+    }))
       
-      this.setState({
-        isAnsweredState:true,
-        answer,
-      })
+    this.setState({
+      isAnsweredState:true,
+      answer,
+    })
       
-    }
-    
-  	render() {
-  		
-      const {question, avatarURLAuthor } =this.props 
-      const {isAnsweredState} = this.state       
+  } 
 
-      
-    	return (
-        <div>
-          {isAnsweredState ? (
-              <div className="poll-container">
-                <h5>These are the data for this poll</h5>
-                
-              </div>
-            ):(
-              <div className="poll-container">
-                <h5>Would you rather?....</h5>
-                <div className="row">
-                  <div className="column one" onClick={this.handleVoteOption('optionOne')} >
-                    <h3>{question.optionOne.text}</h3>
-                  </div>
-                  <div className='poll-avatar'>
-                    <img 
-                    src={avatarURLAuthor} 
-                    alt="Avatar" 
-                    className='image-poll'
-                    />
-                  </div>
-                  <div className="column two" onClick={this.handleVoteOption('optionTwo')}>
-                    <h3>{question.optionTwo.text}</h3>
-                  </div>
+  render() {
+
+    const { 
+      question, 
+      users, 
+      authedUser, 
+      match, 
+      isAnswered, 
+      answer, 
+      votesOptionOne, 
+      votesOptionTwo,
+      percentatgeOptionOne,
+      percentatgeOptionTwo,
+      avatarURLAuthor,
+
+    } = this.props
+
+    return (
+      <div>
+        {isAnswered ? (
+            <div className="poll-container">
+              <h5>These are the data for this poll</h5>
+              <div className="row">
+                <div className={answer==="optionOne"? 'column select' :"column"}>
+                  <h4>{question.optionOne.text}</h4>
+                  <p>voted by</p>
+                  <h3>{votesOptionOne} persons</h3>
+                  <h1>{percentatgeOptionOne}%</h1>
                 </div>
-                <p>please, select one and only one answer</p>          
+                <div className='poll-avatar'>
+                  <img 
+                  src={avatarURLAuthor} 
+                  alt="Avatar" 
+                  className='image-poll'
+                  />
+                </div>
+                <div className={answer==="optionTwo"? "column select" :"column"}>
+                  <h4>{question.optionTwo.text}</h4>
+                  <p>voted by</p>
+                  <h3>{votesOptionTwo} persons</h3>
+                  <h1>{percentatgeOptionTwo}%</h1>
+                </div>
               </div>
-            )
-          }
-        </div>
-    	);
-  	}
+            </div>
+          ):(
+            <div className="poll-container">
+              <h5>Would you rather?....</h5>
+              <div className="row">
+                <div className="column one" onClick={this.handleVoteOption('optionOne')} >
+                  <h3>{question.optionOne.text}</h3>
+                </div>
+                <div className='poll-avatar'>
+                  <img 
+                  src={avatarURLAuthor} 
+                  alt="Avatar" 
+                  className='image-poll'
+                  />
+                </div>
+                <div className="column two" onClick={this.handleVoteOption('optionTwo')}>
+                  <h3>{question.optionTwo.text}</h3>
+                </div>
+              </div>
+              <p>please, select one and only one answer</p>          
+            </div>
+          )
+        }
+      </div>
+    );
+  }
 }
+      
+  
 
-function mapStateToProps ({authedUser, questions, users},{match}) {  
-  const question= questions[match.params.questionId]
+function mapStateToProps ({authedUser, questions, users},{match}) {   
+  const qId= match.params.questionId
+  const question = questions[qId]
   const author= question.author
-  
-  return {   
-    questions: questions,
-    question: question,
+  const answersIdArray= Object.keys(users[authedUser].answers)
+  const optionOneVotes = question.optionOne.votes   
+  const optionTwoVotes = question.optionTwo.votes 
+  const votesOptionOne = question.optionOne['votes'].length
+  const votesOptionTwo = question.optionTwo['votes'].length
+
+  console.log(votesOptionOne, votesOptionTwo)
+
+  return {
+    qId,   
+    question,
+    users,
+    authedUser,
+    votesOptionOne,
+    votesOptionTwo,
     avatarURLAuthor: users[author].avatarURL,
-    isAnsweredState: Object.keys(users[authedUser].answers).find(match.params.questionId) 
-                      ? true
-                      : false,
-  
+    isAnswered: (optionOneVotes.find(id => id===authedUser) || optionTwoVotes.find(id => id===authedUser)) ? true : false ,  
+    answer: answersIdArray.some(answId => qId===answId) ? users[author].answers[qId] : '', 
+   
+    percentatgeOptionOne: parseInt(votesOptionOne, 10)/(parseInt(votesOptionOne, 10)+parseInt(votesOptionTwo, 10))*100 ,
+    percentatgeOptionTwo: parseInt(votesOptionTwo, 10)/(parseInt(votesOptionOne, 10)+parseInt(votesOptionTwo, 10))*100 ,
+      
   };
 }
 
