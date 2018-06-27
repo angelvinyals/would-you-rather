@@ -1,24 +1,61 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import './LeaderBoard.css';
 
 class LeaderBoard extends Component {	
  
 	render() {
-
+    
+    const {authedUser, usersArray, usersAnswered, usersAsked} = this.props
+    console.log(usersAnswered)
+    
+   
 		return (
   		<div className="LeaderBoard-title">
   			<h2>LeaderBoard</h2>	    
+        <table class="centerTable">
+          <tbody>
+            <tr>
+              <th>User's Name</th>
+              <th>User's Picture</th>
+              <th>Questions asked</th>
+              <th>Questions answered</th>
+            </tr>
+           
+            {usersArray.map(usr =>(
+                <tr>
+                  <td>{usr.name}</td>
+                  <td>
+                    <img src={`${usr.avatarURL}`}  alt="avatar" height="25" width="25" /> 
+                  </td>
+                  <td>{usersAsked[usr.id]}</td>
+                  <td>{usersAnswered[usr.id]}</td>
+                </tr>
+              ))
+            }            
+          </tbody>
+        </table>
       </div> 
   	)
 	}
 }
 
-function mapStateToProps ({authedUser, users},{user}) {  
+function mapStateToProps ({authedUser, users, questions}) {  
+  
+  const usersArray= Object.values(users)
+  console.log(usersArray)
   
   return {
     authedUser,
-    user,
+    usersArray,
+    usersAnswered: usersArray.reduce((acc, us) => {
+                                                  acc[us.id]= Object.keys(us.answers).length
+                                                  return acc 
+                                                },[]),  
+    usersAsked: usersArray.reduce((acc, us) => {
+                                                  acc[us.id]= us.questions.length
+                                                  return acc 
+                                                },[]),   
   };
 }
 
