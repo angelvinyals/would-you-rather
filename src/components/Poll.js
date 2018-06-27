@@ -107,8 +107,6 @@ function mapStateToProps ({authedUser, questions, users},{match}) {
   const votesOptionOne = question.optionOne['votes'].length
   const votesOptionTwo = question.optionTwo['votes'].length
 
-  console.log(votesOptionOne, votesOptionTwo)
-
   return {
     qId,   
     question,

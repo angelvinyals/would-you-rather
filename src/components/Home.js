@@ -12,7 +12,7 @@ class Home extends Component {
     
   	render() {
 
-  		const { user, match} = this.props
+  		const { user, match, authedUser} = this.props
 
       return (
     		<div className="home-title">
@@ -23,13 +23,13 @@ class Home extends Component {
 				  	className='image-home'
 				  	/>
 		      <h5>Welcome,  {user.name}</h5>
-          <Nav match={match}/>          
+                   
                     
-          <Switch>
-            <Route  path={`${match.url}/add`}  component={NewPoll}/>
-            <Route  path={`${match.url}/leaderboard`}  component={LeaderBoard}/>
-            <Route  path={`${match.url}/:questionId`} component={Poll}/>            
-            <Route  path={`${match.url}/`} component={QuestionsList}/>             
+          <Switch>    
+            <Route  path={`/${authedUser}/questions/:questionId`} component={Poll}/>                
+            <Route  path={`/${authedUser}/questions`} component={QuestionsList}/>
+            <Route  path={`/${authedUser}/add`} component={NewPoll}/>     
+            <Route  path={`/${authedUser}/LeaderBoard`} component={LeaderBoard}/>                
           </Switch>
         </div> 
     	)
