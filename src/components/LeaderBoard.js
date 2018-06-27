@@ -3,12 +3,22 @@ import { connect } from 'react-redux';
 import './LeaderBoard.css';
 
 class LeaderBoard extends Component {	
- 
+
+  sortUsers = (array, answered, asked) => {
+
+    array.map(userArray =>{
+                userArray["sum"]=(answered[userArray.id]+asked[userArray.id])      
+              })    
+    array.sort( (a,b) => b.sum - a.sum )      
+    return array
+  } 
+
+
 	render() {
     
     const {authedUser, usersArray, usersAnswered, usersAsked} = this.props
     console.log(usersAnswered)
-    
+    const usersSorted= this.sortUsers(usersArray,usersAnswered, usersAsked)
    
 		return (
   		<div className="LeaderBoard-title">
@@ -22,7 +32,7 @@ class LeaderBoard extends Component {
               <th>Questions answered</th>
             </tr>
            
-            {usersArray.map(usr =>(
+            {usersSorted.map(usr =>(
                 <tr>
                   <td>{usr.name}</td>
                   <td>
