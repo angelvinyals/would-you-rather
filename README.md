@@ -3,7 +3,7 @@
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-### What is "Would you rather?"
+## What is "Would you rather?"
 
 "Would You Rather?" Project it's a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
 
@@ -12,9 +12,9 @@ In Would You Rather?, users are be able to answer questions, see which questions
 
 
 
-### Rubricks
+## Rubricks
 
-#### Application Setup
+### Application Setup
 
 **Is the application easy to install and start?** 
 
@@ -31,7 +31,7 @@ Yes. It is. Once you’ve cloned the project, cd in the would-you-rather directo
 
 This is what your are reading.
 
-#### Login Flow
+### Login Flow
 
 **Does the application have a way to log in and log out?**
 
@@ -50,7 +50,7 @@ If you types something in the address bar, log in page is shown.
 
 Checked. It works.
 
-#### Application Functionality
+### Application Functionality
 
 **Does the home page have the desired functionality?**
 
@@ -95,7 +95,7 @@ The application asks the user to sign in and shows a 404 page if that poll does 
 
 
 
-## Table of Contents
+# Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
