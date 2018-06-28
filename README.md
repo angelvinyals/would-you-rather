@@ -10,6 +10,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 In Would You Rather?, users are be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
 
+![Scheme](login.jpg)
+
 ### Rubricks
 
 Application Setup
