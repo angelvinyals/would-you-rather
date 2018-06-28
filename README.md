@@ -14,7 +14,7 @@ In Would You Rather?, users are be able to answer questions, see which questions
 
 ### Rubricks
 
-####Application Setup
+#### Application Setup
 
 **Is the application easy to install and start?** 
 
@@ -31,7 +31,7 @@ Yes. It is. Once you’ve cloned the project, cd in the would-you-rather directo
 
 This is what your are reading.
 
-####Login Flow
+#### Login Flow
 
 **Does the application have a way to log in and log out?**
 
@@ -50,7 +50,7 @@ If you types something in the address bar, log in page is shown.
 
 Checked. It works.
 
-####Application Functionality
+#### Application Functionality
 
 **Does the home page have the desired functionality?**
 
