@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
@@ -10,33 +10,55 @@ You can find the most recent version of this guide [here](https://github.com/fac
 In Would You Rather?, users are be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
 
-![Scheme](images/login.png)
+
 
 ### Rubricks
 
-Application Setup
+####Application Setup
 
-Is the application easy to install and start?  
+**Is the application easy to install and start?** 
 
-The application requires only npm install and npm start to install and launch.  |
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Facebook has created it to generate a boilerplate version of a React application.
 
-Does the application include README with clear installation and launch instructions?  
-A README is included with the project. The README includes a description and clear instructions for installing and launching the project.
-
-Login Flow
-
-Does the application have a way to log in and log out?  
-The application requires only npm install and npm start to install and launch.
-
-1-There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
-
-2-The application works correctly regardless of which user is selected.
-
-3-The application allows the user to log out and log back in. The user should be logged in to submit new polling questions, vote, and view the leaderboard.
-
-4-Once the user logs in, the home page is shown.
+Besides providing something that works out-of-the-box, this has the added benefit of providing a consistent structure for React apps that you will recognize as you move between React projects. It also provides an out-of-the-box build script and development server.
 
 
+**The application requires only npm install and npm start to install and launch?** |
+
+Yes. It is. Once you’ve cloned the project, cd in the would-you-rather directory and run npm install then npm start. This assumes you’ve got Node.js already installed. In general, look at the scripts definition in package.json to learn what the [available actions](https://github.com/reactjs/redux/tree/master/examples/todomvc#available-scripts) are for a package. 
+
+**Does the application include README with clear installation and launch instructions?**
+
+This is what your are reading.
+
+####Login Flow
+
+**Does the application have a way to log in and log out?**
+
+When app start it goes to "login"
+
+![Scheme](images/login.png)
+
+You have to select one user. When you click inside avatar's user you are authenticated and app goes to home page. 
+
+![Scheme](images/home-sarahedo.png) 
+
+Where you can click on log out tag navigation, and comes back to first screen "login".
+If you types something in the address bar, log in page is shown.
+
+**Does the application work correctly regardless of which person the user impersonates?**
+
+Checked. It works.
+
+####Application Functionality
+
+**Does the home page have the desired functionality?**
+
+The answered and unanswered polls are both available at the root, with a button than toggle between them. The unanswered questions are shown by default.The name of the logged in user is visible on the page.The user can navigate to the leaderboard.The user can navigate to the form that allows the user to create a new poll
+
+**Are the polling questions listed in the correct category (Unanswered vs Answered), and do they have the desired functionality on the home page?**
+
+Each polling question resides in the correct category, each one link to their details and the polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
 
 ## Table of Contents
 
