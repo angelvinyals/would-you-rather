@@ -60,6 +60,41 @@ The answered and unanswered polls are both available at the root, with a button 
 
 Each polling question resides in the correct category, each one link to their details and the polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
 
+**Are the details of each poll displayed with all of the relevant information?**
+
+The details of the poll are available at `questions/:question_id`.
+
+When a poll is clicked on the home page, the following is shown:
+
+1.the text “Would You Rather”;
+2.the picture of the user who posted the polling question.
+3.the two options.
+
+For answered polls, each of the two options contains the following:
+
+1.the text of the option;
+2.the number of people who voted for that option;
+3.the percentage of people who voted for that option.
+
+The option selected by the logged in user should be clearly marked.
+
+When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
+
+The application asks the user to sign in and shows a 404 page if that poll does not exist. (Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
+
+**Does the voting mechanism work correctly?**
+
+1.Upon voting in a poll, all of the information of the answered poll is displayed.
+2.The user’s response is recorded and is clearly visible on the poll details page.
+3.When the user comes back to the home page, the polling question appears in the “Answered” column.
+4.The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
+
+
+
+
+
+
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
