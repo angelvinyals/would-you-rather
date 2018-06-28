@@ -17,13 +17,12 @@ class QuestionsList extends Component {
         answered: !prevState.answered
       }));
     }
-
-
+   
   	render() {
-  		const { YesAnsweredId, NotAnsweredId, questions, match} = this.props
+  		const { questions, match, questionsNotAnswered, questionsAnswered} = this.props
       const {answered}= this.state
-      const questionsList = answered ? YesAnsweredId : NotAnsweredId 
-      console.log (questionsList)
+      const questionsList = answered ? questionsAnswered : questionsNotAnswered 
+      questionsList.sort((a, b) => b.timestamp - a.timestamp)     
 
       return (
     		<div className="questions-container">
@@ -40,17 +39,15 @@ class QuestionsList extends Component {
           </button> 
 
           <ul className='questions-list'>
-            {questionsList.map( id=> 
-                <li key={`q${id}`}>
-                  <Link to={`${match.url}/${id}`}>
-                    {questions[id].optionOne.text} / {questions[id].optionTwo.text}     
+            {questionsList.map( q => 
+                <li key={`q${q['id']}`}>
+                  <Link to={`${match.url}/${q['id']}`}>
+                    {q['optionOne'].text} / {q['optionTwo'].text}     
                   </Link>
                 </li> 
               )
             }            
-          </ul> 
-           
-            
+          </ul>             
 		    </div>
     	);
   	}
@@ -59,18 +56,19 @@ class QuestionsList extends Component {
 function mapStateToProps ({authedUser, questions, users}) {  
   const questionsArray= Object.values(questions)
   const answeredId = Object.keys(users[authedUser].answers)
-  return {
-    questions,
-    sortedQuestionsArray:questionsArray.sort((a, b) => b.timestamp - a.timestamp),
-    YesAnsweredId: answeredId,
-    NotAnsweredId: questionsArray.reduce((acc, q)=> {
+  return {    
+    questionsNotAnswered: questionsArray.reduce((acc, q)=> {
                       acc= answeredId.some( a => a===q.id)
                           ? acc
-                          : acc.concat(q.id)
+                          : acc.concat(q)
                       return acc          
-                    },[]) 
-
-     
+                    },[]),
+    questionsAnswered: questionsArray.reduce((acc, q)=> {
+                      acc= answeredId.some( a => a===q.id)
+                          ? acc.concat(q)
+                          : acc
+                      return acc          
+                    },[]),     
   };
 }
 
