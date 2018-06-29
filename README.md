@@ -78,9 +78,9 @@ For answered polls, each of the two options contains the following:
 
 The option selected by the logged in user should be clearly marked.
 
-When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
+When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before being able to access the poll.
 
-The application asks the user to sign in and shows a 404 page if that poll does not exist. (Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
+The application asks the user to sign in and shows a 404 page if that poll does not exist. New polls will not be accessible at their url because of the way the backend is set up in this application.
 
 **Does the voting mechanism work correctly?**
 
@@ -90,9 +90,43 @@ The application asks the user to sign in and shows a 404 page if that poll does 
 4.The voting mechanism works correctly, and the data on the leaderboard changes appropriately.
 
 
+**Can users add new polls?**
 
+Yes. 
+1.The form is available at `/add`.
+2.The application shows the text “Would You Rather” and has a form for creating two options.
+3.Upon submitting the form, a new poll is created and the user is taken to the home page.
+4.The new polling question appears in the correct category on the home page.The form is available at `/add`. 
 
+**Does the leaderboard work correctly and have the desired functionality?**
 
+1.The Leaderboard is available at/leaderboard.
+2.Each entry on the leaderboard contains the following:
+the user’s name;
+the user’s picture;
+the number of questions the user asked; and
+the number of questions the user answered.
+
+3.Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
+
+**Is the application navigable?**
+
+The app contains a navigation bar that is visible on all of the pages.
+
+The user can navigate between the page for creating new polls, and the leaderboard page, and the home page without typing the address into the address bar.
+
+**Does the application interact with the backend correctly?**
+
+1.The data that’s initially displayed is populated correctly from the backend.
+2.Each user’s answer and each new poll is correctly recorded on the backend.
+
+### Architecture
+
+**Does the store serve as the application’s single source of truth?**
+
+1.The store is the application’s source of truth.
+2.Components read the necessary state from the store; they do not have their own versions of the same state.
+3.There are no direct API calls in the components' lifecycle methods.
 
 
 # Table of Contents
