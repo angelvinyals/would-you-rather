@@ -9,22 +9,24 @@ import {
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
 import Login from  './Login'
-import Home from  './Home'
+import UserHome from  './UserHome'
 import NewPoll from  './NewPoll'
 import NoMatch from './NoMatch'
-import Logout from './Logout'
+import Home from  './Home'
+
 import LoadingBar from 'react-redux-loading'
 import './App.css';
 
 class App extends Component {
 
-	componentDidMount (){
-		this.props.dispatch(handleInitialData())
-		return <Redirect to={`/login`}/>
+	componentDidMount (){		
+		return this.props.dispatch(handleInitialData())
 	}	
 
 	render() {
+
   		const {authedUser} = this.props
+  		console.log('render app...')
 
     	return (
     		<Fragment>
@@ -33,11 +35,10 @@ class App extends Component {
 	    		<div>
 	    			<Route path="/" render={(props) => <Nav {...props} authedUser={authedUser} />} />   			    			    		
 				    <Switch>					    
-				        <Route path={`/${authedUser}`} component={Home}/>
-					 	<Route path="/logout"  component={Logout}/>
+				        <Route path={`/${authedUser}`} component={UserHome}/>					 
 						<Route path="/login" component={Login} />
-						<Route path="/" component={Login} />						
-						<Route component={NoMatch} />
+						<Route exact path="/" component={Home} />
+						<Route component={NoMatch} />					
 					</Switch>
 				</div>				    
 			    </Router>
