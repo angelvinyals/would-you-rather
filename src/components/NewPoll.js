@@ -11,27 +11,6 @@ class NewPoll extends Component {
     optionTwoText:'',
   };
 
-  /*
-  handleVoteOption = (answer) => (e) =>{
-      e.preventDefault()
-
-      const {dispatch, authedUser, id  }= this.props
-      console.log( authedUser, id, answer)
-
-      dispatch(handleSaveAnswer({
-        qid:id,
-        authedUser,
-        answer,
-      }))
-      
-      this.setState({
-        isAnsweredState:true,
-        answer,
-      })
-      
-    }
-  */
-
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
