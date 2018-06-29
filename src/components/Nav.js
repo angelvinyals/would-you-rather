@@ -9,10 +9,10 @@ export default function Nav({match, authedUser}) {
 			<div>
 				<nav  className="nav-fill">
 					<ul className= "nav-nav">				
-						<NavLink  to="/">Home</NavLink>
+						<NavLink  to={`/${authedUser}/questions`}>Questions List</NavLink>
 						<NavLink  to={`/${authedUser}/add`}>Add New poll</NavLink>
 						<NavLink  to={`/${authedUser}/leaderboard`}>Leaderboard</NavLink>
-						<NavLink  to={`/logout`}>Log out</NavLink>
+						<NavLink  to={`/${authedUser}/logout`}>Log out</NavLink>
 					</ul>
 				</nav>	        
 	    	</div>
