@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Poll from './Poll'
 import QuestionsList from './QuestionsList'
-import Nav from './Nav'
 import NewPoll from  './NewPoll'
 import LeaderBoard from  './LeaderBoard'
 import Logout from './Logout'
@@ -17,7 +16,7 @@ class UserHome extends Component {
     
   	render() {
 
-  		const { user, match, authedUser} = this.props
+  		const { user, authedUser} = this.props
        console.log('Home render...')
 
       return (

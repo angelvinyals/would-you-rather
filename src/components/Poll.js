@@ -27,10 +27,7 @@ class Poll extends Component {
   render() {
 
     const { 
-      question, 
-      users, 
-      authedUser, 
-      match, 
+      question,  
       isAnswered, 
       answer, 
       votesOptionOne, 

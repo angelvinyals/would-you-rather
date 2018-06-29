@@ -19,7 +19,7 @@ class QuestionsList extends Component {
     }
    
   	render() {
-  		const { questions, match, questionsNotAnswered, questionsAnswered} = this.props
+  		const { match, questionsNotAnswered, questionsAnswered} = this.props
       const {answered}= this.state
       const questionsList = answered ? questionsAnswered : questionsNotAnswered 
       questionsList.sort((a, b) => b.timestamp - a.timestamp)     

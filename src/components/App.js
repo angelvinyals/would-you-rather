@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import { 
     BrowserRouter as Router,
 	Route, 
-	Redirect,
 	Switch
 } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
 import Login from  './Login'
 import UserHome from  './UserHome'
-import NewPoll from  './NewPoll'
 import NoMatch from './NoMatch'
 import Home from  './Home'
 
