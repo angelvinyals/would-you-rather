@@ -113,7 +113,7 @@ function mapStateToProps ({authedUser, questions, users},{match}) {
     votesOptionTwo,
     avatarURLAuthor: users[author].avatarURL,
     isAnswered: (optionOneVotes.find(id => id===authedUser) || optionTwoVotes.find(id => id===authedUser)) ? true : false ,  
-    answer: answersIdArray.some(answId => qId===answId) ? users[author].answers[qId] : '', 
+    answer: answersIdArray.some(answId => qId===answId) ? users[authedUser].answers[qId] : '', 
    
     percentatgeOptionOne: parseInt(votesOptionOne, 10)/(parseInt(votesOptionOne, 10)+parseInt(votesOptionTwo, 10))*100 ,
     percentatgeOptionTwo: parseInt(votesOptionTwo, 10)/(parseInt(votesOptionOne, 10)+parseInt(votesOptionTwo, 10))*100 ,
