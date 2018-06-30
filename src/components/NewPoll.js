@@ -48,6 +48,7 @@ class NewPoll extends Component {
           <label>
             option One
             <input 
+              required
               name="optionOneText"
               type="text"
               value={this.state.optionOneText}
@@ -56,6 +57,7 @@ class NewPoll extends Component {
           <label>
             option Two
             <input 
+              required
               name="optionTwoText"
               type="text"
               value={this.state.optionTwoText}
