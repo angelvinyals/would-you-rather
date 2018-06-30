@@ -4,13 +4,13 @@ import './LeaderBoard.css';
 
 class LeaderBoard extends Component {	
 
-  sortUsers = (array, answered, asked) => {
+  sortUsers = (usersA, answered, asked) => {
 
-    array.map(userArray =>(
+    usersA.map(userArray =>(
                     userArray["sum"]=(answered[userArray.id]+asked[userArray.id])      
               ))    
-    array.sort( (a,b) => b.sum - a.sum )      
-    return array
+    return usersA.sort( (a,b) => b.sum - a.sum )      
+    
   } 
 
 
